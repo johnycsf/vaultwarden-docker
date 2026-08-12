@@ -4,7 +4,7 @@ Deploy [Vaultwarden](https://github.com/dani-garcia/vaultwarden) (Bitwarden-comp
 
 Kubernetes version: [vaultwarden-k8s](https://github.com/johnycsf/vaultwarden-k8s)
 
-Follows Vaultwarden guidance: set `DOMAIN`, keep signups open only long enough to create your first account, store `ADMIN_TOKEN` outside git.
+Follows Vaultwarden guidance using the **official** project image [`vaultwarden/server`](https://hub.docker.com/r/vaultwarden/server): set `DOMAIN`, keep signups open only long enough to create your first account, store `ADMIN_TOKEN` outside git.
 
 ## What you need
 
