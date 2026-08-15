@@ -10,8 +10,11 @@ Follows Vaultwarden guidance using the **official** project image [`vaultwarden/
 
 ## What you need
 
-- Docker with Compose plugin
-- `openssl` (used by `install.sh` to generate the admin token)
+- A Linux host (Debian/Ubuntu, Fedora/RHEL, Arch, openSUSE, Alpine) or macOS with Homebrew
+- `sudo` so `./install.sh` can install missing tools (Docker, curl, openssl, rsync, …)
+- Enough disk for your data
+
+`./install.sh` detects your OS and installs host dependencies automatically.
 
 ## Install
 
