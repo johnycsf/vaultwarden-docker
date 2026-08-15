@@ -47,6 +47,10 @@ docker compose down
 rm -rf data .env .admin-token
 ```
 
+## Repository activity
+
+![Repobeats analytics image](https://repobeats.axiom.co/api/embed/6781d12a788abf6f1b29a66135462189dfd91901.svg "Repobeats analytics image")
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
