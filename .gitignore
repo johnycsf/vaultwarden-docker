@@ -2,3 +2,4 @@
 data/
 .admin-token
 backups/
+.backup-keep-count
