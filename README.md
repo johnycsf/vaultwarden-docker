@@ -37,10 +37,15 @@ Edit `.env` (created from `.env.example`):
 
 ## Update
 
+Keep the stack current (safe while running; brief recreate downtime):
+
 ```bash
-docker compose pull
-docker compose up -d
+chmod +x update.sh
+./update.sh
 ```
+
+This pulls/rebuilds images, recreates containers as needed, and runs `docker image prune` for **dangling** (untagged) images only — it will not wipe other projects' images or your `data/` volume.
+
 
 ## Uninstall
 
