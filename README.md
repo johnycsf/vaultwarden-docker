@@ -2,11 +2,24 @@
 
 ![Repobeats analytics image](https://repobeats.axiom.co/api/embed/6781d12a788abf6f1b29a66135462189dfd91901.svg "Repobeats analytics image")
 
+
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/johnycsf)
+
 Deploy [Vaultwarden](https://github.com/dani-garcia/vaultwarden) (Bitwarden-compatible password manager) with Docker Compose.
 
 Kubernetes version: [vaultwarden-k8s](https://github.com/johnycsf/vaultwarden-k8s)
 
 Follows Vaultwarden guidance using the **official** project image [`vaultwarden/server`](https://hub.docker.com/r/vaultwarden/server): set `DOMAIN`, keep signups open only long enough to create your first account, store `ADMIN_TOKEN` outside git.
+
+
+## Why this repo (not just another compose file)
+
+- **`./manage.sh`** control center — install, update, backup, status/doctor, uninstall
+- Interactive colored install with step progress
+- Auto-detects your OS and installs missing host tools
+- Safe **`./update.sh`** with automatic pre-update backup
+- Incremental hardlink **`./backup.sh`** + restore
+- **Official upstream images only**
 
 ## What you need
 
@@ -21,8 +34,9 @@ Follows Vaultwarden guidance using the **official** project image [`vaultwarden/
 ```bash
 git clone https://github.com/johnycsf/vaultwarden-docker.git
 cd vaultwarden-docker
-chmod +x install.sh
-./install.sh
+chmod +x manage.sh install.sh
+./manage.sh          # interactive control center
+# or: ./install.sh
 ```
 
 Open the URL printed by the script, create your account, then disable signups as instructed.
@@ -98,3 +112,12 @@ rm -rf data .env .admin-token
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Support this work
+
+If these homelab tools save you time, please consider sponsoring:
+
+[![Sponsor johnycsf](https://img.shields.io/badge/GitHub%20Sponsors-Donate-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/johnycsf)
+
+👉 **[github.com/sponsors/johnycsf](https://github.com/sponsors/johnycsf)** — tips and monthly support keep these beginner-friendly stacks maintained.
+
