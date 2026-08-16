@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
-# Install Vaultwarden with Docker Compose (interactive).
+# Install Vaultwarden with Compose / Docker or Podman (interactive).
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 # shellcheck source=scripts/deps.sh
 source "${ROOT}/scripts/deps.sh"
 
-ui_banner "Vaultwarden" "Docker Compose · official vaultwarden/server image"
 ui_steps_init 4
-
 ui_step "Preparing configuration"
 if [[ ! -f .env ]]; then
   cp .env.example .env
@@ -18,6 +16,7 @@ else
 fi
 
 configure_container_engine
+ui_banner "Vaultwarden" "$(compose_stack_subtitle "official vaultwarden/server image")"
 
 ui_step "Checking host dependencies"
 ensure_host_deps docker
