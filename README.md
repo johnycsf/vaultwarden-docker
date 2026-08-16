@@ -2,8 +2,9 @@
 
 ![Repobeats analytics image](https://repobeats.axiom.co/api/embed/6781d12a788abf6f1b29a66135462189dfd91901.svg "Repobeats analytics image")
 
-
 [![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/johnycsf)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Issues](https://img.shields.io/badge/issues-welcome-lightgrey.svg)](../../issues/new/choose)
 
 Deploy [Vaultwarden](https://github.com/dani-garcia/vaultwarden) (Bitwarden-compatible password manager) with Docker Compose.
 
@@ -11,6 +12,15 @@ Kubernetes version: [vaultwarden-k8s](https://github.com/johnycsf/vaultwarden-k8
 
 Follows Vaultwarden guidance using the **official** project image [`vaultwarden/server`](https://hub.docker.com/r/vaultwarden/server): set `DOMAIN`, keep signups open only long enough to create your first account, store `ADMIN_TOKEN` outside git.
 
+**One-command Vaultwarden** — official `vaultwarden/server`, interactive install, safe updates & backups.
+
+> **Choose your path:** **Docker Compose (this repo)** · [Kubernetes](https://github.com/johnycsf/vaultwarden-k8s)
+
+## Who this is for
+
+**Good fit:** a personal or family password manager on a trusted LAN / reverse proxy.
+
+**Not for:** replacing Bitwarden’s official commercial cloud — Vaultwarden is unofficial and compatible; you own ops and backups.
 
 ## Why this repo (not just another compose file)
 
@@ -20,6 +30,18 @@ Follows Vaultwarden guidance using the **official** project image [`vaultwarden/
 - Safe **`./update.sh`** with automatic pre-update backup
 - Incremental hardlink **`./backup.sh`** + restore
 - **Official upstream images only**
+
+## Support this work
+
+If this stack saved you setup time, please consider sponsoring — it funds:
+
+- Keeping install/update/backup scripts working across common Linux distros
+- Testing safe upgrades against **official** upstream images
+- Building more beginner-friendly stacks that share the same `./manage.sh` UX
+
+[![Sponsor johnycsf](https://img.shields.io/badge/GitHub%20Sponsors-Donate-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/johnycsf)
+
+👉 **[github.com/sponsors/johnycsf](https://github.com/sponsors/johnycsf)**
 
 ## What you need
 
@@ -40,6 +62,8 @@ chmod +x manage.sh install.sh
 ```
 
 Open the URL printed by the script, create your account, then disable signups as instructed.
+
+Liked the install? Star the repo or [sponsor johnycsf](https://github.com/sponsors/johnycsf) so more stacks stay maintained.
 
 ## Customize
 
@@ -75,8 +99,6 @@ Older `backups/update-*` tarball folders (from previous script versions) are no 
 
 This pulls/rebuilds images, recreates containers as needed, and runs `docker image prune` for **dangling** (untagged) images only — it will not wipe other projects' images or your `data/` volume.
 
-
-
 ## Disaster recovery (full backup / restore)
 
 Incremental snapshots via `rsync` hardlinks (unchanged files are not re-copied). `./update.sh` uses this same `backup.sh` before updating (into `./backups`).
@@ -100,14 +122,12 @@ Keep the backup root on **one filesystem** so hardlinks work. Prefer an external
 
 **Database safety:** Nextcloud uses a verified MariaDB *logical* dump (`mariadb-dump --single-transaction`) — the live `data/db` / DB PVC files are never rsync'd. SQLite apps (Heimdall, Vaultwarden) are stopped or scaled to 0, WAL-checkpointed when `sqlite3` is available, integrity-checked, then copied. Incremental hardlinks apply to file trees; each SQL dump is a full verified file with a SHA-256 in `META.txt`.
 
-
 ## Uninstall
 
 ```bash
 docker compose down
 rm -rf data .env .admin-token
 ```
-
 
 ## Credits
 
@@ -121,11 +141,6 @@ This project is provided **as is**. The author is **not responsible** for any lo
 
 If you hit an error, please [open a GitHub Issue](../../issues/new/choose) and follow [CONTRIBUTING.md](CONTRIBUTING.md). Fixes via Pull Request are welcome. GitHub Issues/PRs are the supported way to report problems—there is no private support channel.
 
-## Support this work
+## Security
 
-If these homelab tools save you time, please consider sponsoring:
-
-[![Sponsor johnycsf](https://img.shields.io/badge/GitHub%20Sponsors-Donate-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/johnycsf)
-
-👉 **[github.com/sponsors/johnycsf](https://github.com/sponsors/johnycsf)** — tips and monthly support keep these beginner-friendly stacks maintained.
-
+See [SECURITY.md](SECURITY.md) for how to report vulnerabilities.
