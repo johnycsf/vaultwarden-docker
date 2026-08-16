@@ -49,6 +49,8 @@ ui_run "compose pull" compose pull
 ui_step "Starting Vaultwarden"
 ui_run "compose up -d" compose up -d
 
+ensure_host_owned_dir data
+
 DOMAIN_VAL="$(grep -E '^DOMAIN=' .env | cut -d= -f2-)"
 echo
 ui_ok "Vaultwarden is starting"

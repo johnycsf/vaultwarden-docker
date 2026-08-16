@@ -430,6 +430,7 @@ do_restore() {
   [[ -f "${snap}/.admin-token" ]] && cp -a "${snap}/.admin-token" .admin-token
   rm -rf data
   mkdir -p data
+  ensure_host_owned_dir data
   need_rsync
   rsync -aH "${snap}/files/" data/
   compose up -d
