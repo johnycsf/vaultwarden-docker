@@ -43,10 +43,10 @@ fi
 mkdir -p data
 
 ui_step "Pulling images"
-ui_run "compose pull" compose pull
+ui_run --stream "compose pull" compose pull
 
 ui_step "Starting Vaultwarden"
-ui_run "compose up -d" compose up -d
+ui_run --stream "compose up -d" compose up -d
 
 ensure_host_owned_dir data
 
