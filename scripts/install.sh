@@ -9,9 +9,6 @@ source "${ROOT}/scripts/deps.sh"
 ui_banner "Vaultwarden" "Docker Compose · official vaultwarden/server image"
 ui_steps_init 4
 
-ui_step "Checking host dependencies"
-ensure_host_deps docker sqlite3
-
 ui_step "Preparing configuration"
 if [[ ! -f .env ]]; then
   cp .env.example .env
@@ -19,6 +16,11 @@ if [[ ! -f .env ]]; then
 else
   ui_ok "Using existing .env"
 fi
+
+configure_container_engine
+
+ui_step "Checking host dependencies"
+ensure_host_deps docker
 
 configure_host_port PORT "Vaultwarden HTTP" 8081
 IP="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
@@ -42,10 +44,10 @@ fi
 mkdir -p data
 
 ui_step "Pulling images"
-ui_run "docker compose pull" docker compose pull
+ui_run "compose pull" compose pull
 
 ui_step "Starting Vaultwarden"
-ui_run "docker compose up -d" docker compose up -d
+ui_run "compose up -d" compose up -d
 
 DOMAIN_VAL="$(grep -E '^DOMAIN=' .env | cut -d= -f2-)"
 echo
@@ -55,4 +57,4 @@ ui_info "Admin: ${UI_BOLD}${DOMAIN_VAL}/admin${UI_RESET}  (token in .admin-token
 echo
 ui_info "1) Create your account in the browser"
 ui_info "2) Then disable public signups:"
-echo "     sed -i 's/^SIGNUPS_ALLOWED=.*/SIGNUPS_ALLOWED=false/' .env && docker compose up -d"
+echo "     sed -i 's/^SIGNUPS_ALLOWED=.*/SIGNUPS_ALLOWED=false/' .env && compose up -d"

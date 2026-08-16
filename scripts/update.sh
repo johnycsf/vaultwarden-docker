@@ -5,6 +5,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
+# shellcheck source=scripts/deps.sh
+source "${ROOT}/scripts/deps.sh"
 
 
 KEEP_FILE=".backup-keep-count"
@@ -134,7 +136,7 @@ create_backup() {
 
 
 need docker
-docker compose version >/dev/null
+compose version >/dev/null
 
 if [[ ! -f .env ]]; then
   echo "No .env found. Run ./manage.sh first." >&2
@@ -144,11 +146,11 @@ fi
 create_backup
 
 echo "==> Pulling newer images..."
-docker compose pull
+compose pull
 echo "==> Recreating containers if images/config changed (brief downtime)..."
-docker compose up -d --remove-orphans
+compose up -d --remove-orphans
 echo "==> Status:"
-docker compose ps
+compose ps
 echo "==> Removing dangling (untagged) images only — not other projects' images..."
 docker image prune -f
 
