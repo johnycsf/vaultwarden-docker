@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Install Vaultwarden with Docker Compose (interactive).
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
-# shellcheck source=deps.sh
-source "${ROOT}/deps.sh"
+# shellcheck source=scripts/deps.sh
+source "${ROOT}/scripts/deps.sh"
 
 ui_banner "Vaultwarden" "Docker Compose · official vaultwarden/server image"
 ui_steps_init 4
