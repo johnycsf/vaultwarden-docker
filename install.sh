@@ -20,13 +20,13 @@ else
   ui_ok "Using existing .env"
 fi
 
-if grep -q 'DOMAIN=http://192.168.1.50:8081' .env; then
-  IP="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
-  PORT="$(grep -E '^PORT=' .env | cut -d= -f2 || echo 8081)"
-  if [[ -n "${IP}" ]]; then
-    sed -i "s|^DOMAIN=.*|DOMAIN=http://${IP}:${PORT}|" .env
-    ui_ok "Set DOMAIN=http://${IP}:${PORT} (edit .env if wrong)"
-  fi
+configure_host_port PORT "Vaultwarden HTTP" 8081
+IP="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
+if [[ -n "${IP}" ]]; then
+  env_file_set DOMAIN "http://${IP}:${PORT}"
+  ui_ok "DOMAIN=http://${IP}:${PORT}"
+elif grep -q 'DOMAIN=http://192.168.1.50:8081' .env; then
+  ui_warn "Could not detect IP — edit DOMAIN in .env"
 fi
 
 if grep -q 'ADMIN_TOKEN=CHANGE_ME' .env; then
