@@ -27,7 +27,7 @@ if [[ -n "${IP}" ]]; then
   env_file_set DOMAIN "http://${IP}:${PORT}"
   ui_ok "DOMAIN=http://${IP}:${PORT}"
 elif grep -q 'DOMAIN=http://192.168.1.50:8081' .env; then
-  ui_warn "Could not detect IP — edit DOMAIN in .env"
+  ui_warn "Could not detect IP - edit DOMAIN in .env"
 fi
 
 if grep -q 'ADMIN_TOKEN=CHANGE_ME' .env; then
@@ -37,7 +37,7 @@ if grep -q 'ADMIN_TOKEN=CHANGE_ME' .env; then
   printf '%s\n' "${TOKEN}" > .admin-token
   ui_ok "Generated ADMIN_TOKEN (saved to .admin-token)"
 else
-  ui_ok "ADMIN_TOKEN already set — leaving it alone"
+  ui_ok "ADMIN_TOKEN already set - leaving it alone"
 fi
 
 mkdir -p data
