@@ -2,7 +2,7 @@ services:
   vaultwarden:
     image: ${IMAGE_REGISTRY:-docker.io}/vaultwarden/server:latest
     container_name: vaultwarden
-    restart: unless-stopped
+    restart: always
     environment:
       DOMAIN: ${DOMAIN}
       SIGNUPS_ALLOWED: ${SIGNUPS_ALLOWED:-true}
