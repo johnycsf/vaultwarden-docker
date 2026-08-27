@@ -19,7 +19,7 @@ configure_container_engine
 ui_banner "Vaultwarden" "$(compose_stack_subtitle "official vaultwarden/server image")"
 
 ui_step "Checking host dependencies"
-ensure_host_deps docker
+ensure_host_deps docker age zip unzip xz
 
 configure_host_port PORT "Vaultwarden HTTP" 8081
 IP="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
